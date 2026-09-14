@@ -2,7 +2,7 @@
 
 import Link from 'next/link'
 import { useEffect, useState, type FormEvent } from 'react'
-import { Plus, FileText, Clock, ArrowRight, X } from 'lucide-react'
+import { Plus, FileText, Clock, ArrowRight, X, Trash2 } from 'lucide-react'
 import { PageHeader, ProgressBar } from '@/components/app/primitives'
 import type { Subject } from '@/lib/mock-data'
 import { loadSubjects, saveSubjects } from '@/lib/subjects-store'
@@ -40,6 +40,7 @@ export default function SubjectsPage() {
       lastStudied: 'Not studied yet',
       description: description.trim() || 'No description added yet.',
     }
+
     const nextSubjects = [...subjects, subject]
     setSubjects(nextSubjects)
     saveSubjects(nextSubjects)
@@ -47,6 +48,12 @@ export default function SubjectsPage() {
     setCode('')
     setDescription('')
     setIsFormOpen(false)
+  }
+
+  function deleteSubject(id: string) {
+    const nextSubjects = subjects.filter((subject) => subject.id !== id)
+    setSubjects(nextSubjects)
+    saveSubjects(nextSubjects)
   }
 
   return (
@@ -99,7 +106,17 @@ export default function SubjectsPage() {
                   <span className="flex size-9 items-center justify-center rounded-lg text-[13px] font-semibold text-background" style={{ backgroundColor: subject.color }}>
                     {subject.name.split(' ').slice(0, 2).map((word) => word[0]).join('')}
                   </span>
-                  <span className="rounded-md border border-border px-1.5 py-0.5 font-mono text-[10px] text-muted-foreground">{subject.code}</span>
+                  <div className="flex items-center gap-2">
+                    <span className="rounded-md border border-border px-1.5 py-0.5 font-mono text-[10px] text-muted-foreground">{subject.code}</span>
+                    <button
+                      type="button"
+                      onClick={() => deleteSubject(subject.id)}
+                      className="inline-flex size-7 items-center justify-center rounded-md text-muted-foreground transition-colors hover:bg-red-50 hover:text-red-600"
+                      aria-label={`Delete ${subject.name}`}
+                    >
+                      <Trash2 className="size-3.5" />
+                    </button>
+                  </div>
                 </div>
                 <h2 className="mt-4 text-[15px] font-semibold text-foreground">{subject.name}</h2>
                 <p className="mt-1 line-clamp-2 text-[13px] leading-relaxed text-muted-foreground">{subject.description}</p>

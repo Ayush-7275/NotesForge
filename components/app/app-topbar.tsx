@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import Link from 'next/link'
-import { Search, Bell, Menu, X, LogOut, User, CreditCard } from 'lucide-react'
+import { Search, Bell, Menu, X, LogOut, User } from 'lucide-react'
 import { AppSidebar } from '@/components/app/app-sidebar'
 
 export function AppTopbar() {
@@ -107,19 +107,14 @@ export function AppTopbar() {
                   </p>
                 </div>
                 <div className="my-1 h-px bg-border" />
-                {[
-                  { icon: User, label: 'Profile' },
-                  { icon: CreditCard, label: 'Billing' },
-                ].map((i) => (
-                  <button
-                    key={i.label}
-                    type="button"
-                    className="flex w-full items-center gap-2 rounded-md px-3 py-1.5 text-[13px] text-foreground transition-colors hover:bg-muted"
-                  >
-                    <i.icon className="size-4 text-muted-foreground" />
-                    {i.label}
-                  </button>
-                ))}
+                <Link
+                  href="/profile"
+                  onClick={() => setProfileOpen(false)}
+                  className="flex w-full items-center gap-2 rounded-md px-3 py-1.5 text-[13px] text-foreground transition-colors hover:bg-muted"
+                >
+                  <User className="size-4 text-muted-foreground" />
+                  Profile
+                </Link>
                 <div className="my-1 h-px bg-border" />
                 <Link
                   href="/"
