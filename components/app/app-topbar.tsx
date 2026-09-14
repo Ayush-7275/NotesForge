@@ -2,14 +2,13 @@
 
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
-import { Search, Bell, Menu, X, LogOut, User } from 'lucide-react'
+import { Search, Menu, X, LogOut, User } from 'lucide-react'
 import { AppSidebar } from '@/components/app/app-sidebar'
 import { defaultProfile, loadProfile, type Profile } from '@/lib/profile-store'
 
 export function AppTopbar() {
   const [mobileOpen, setMobileOpen] = useState(false)
   const [profileOpen, setProfileOpen] = useState(false)
-  const [notifOpen, setNotifOpen] = useState(false)
   const [profile, setProfile] = useState<Profile>(defaultProfile)
 
   useEffect(() => {
@@ -43,57 +42,12 @@ export function AppTopbar() {
           </kbd>
         </div>
 
-        <div className="flex flex-1 items-center justify-end gap-1.5 sm:flex-none">
-          <div className="relative">
-            <button
-              type="button"
-              onClick={() => {
-                setNotifOpen((v) => !v)
-                setProfileOpen(false)
-              }}
-              className="relative rounded-md p-2 text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
-              aria-label="Notifications"
-            >
-              <Bell className="size-[18px]" />
-              <span className="absolute right-1.5 top-1.5 size-1.5 rounded-full bg-brand" />
-            </button>
-            {notifOpen && (
-              <div className="absolute right-0 top-full z-40 mt-1.5 w-80 rounded-lg border border-border bg-popover p-1 shadow-md">
-                <p className="px-3 py-2 text-xs font-medium text-muted-foreground">
-                  Notifications
-                </p>
-                {[
-                  {
-                    t: 'Normalization.pptx finished processing',
-                    s: 'Database Systems · 10 min ago',
-                  },
-                  {
-                    t: 'Your uploaded material is ready',
-                    s: 'Database Systems · 1 hour ago',
-                  },
-                  {
-                    t: 'Databases exam in 6 days',
-                    s: 'Study plan updated · 3 hours ago',
-                  },
-                ].map((n) => (
-                  <div
-                    key={n.t}
-                    className="rounded-md px-3 py-2 transition-colors hover:bg-muted"
-                  >
-                    <p className="text-[13px] text-foreground">{n.t}</p>
-                    <p className="text-[11px] text-muted-foreground">{n.s}</p>
-                  </div>
-                ))}
-              </div>
-            )}
-          </div>
-
+        <div className="flex flex-1 items-center justify-end sm:flex-none">
           <div className="relative">
             <button
               type="button"
               onClick={() => {
                 setProfileOpen((v) => !v)
-                setNotifOpen(false)
               }}
               className="flex items-center gap-2 rounded-lg p-1 pr-2 transition-colors hover:bg-muted"
               aria-label="Account menu"
@@ -158,12 +112,11 @@ export function AppTopbar() {
         </div>
       )}
 
-      {(profileOpen || notifOpen) && (
+      {profileOpen && (
         <div
           className="fixed inset-0 z-20"
           onClick={() => {
             setProfileOpen(false)
-            setNotifOpen(false)
           }}
         />
       )}
