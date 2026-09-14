@@ -8,7 +8,9 @@ export default function NotesPage() {
         title="Notes"
         description="Review and organize your course notes."
       />
-      <NotesView />
+      <div className="mx-auto max-w-6xl px-4 py-6 sm:px-8">
+        <NotesView />
+      </div>
     </div>
   )
 }
