@@ -18,7 +18,7 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: 'NoteForge — Study smarter with AI',
   description:
-    'NoteForge turns your syllabus, slides, PDFs, and notes into organized summaries, quizzes, flashcards, and a personal AI study assistant.',
+    'NoteForge turns your syllabus, slides, PDFs, and notes into organized summaries and a personal AI study assistant.',
   generator: 'v0.app',
   icons: {
     icon: [

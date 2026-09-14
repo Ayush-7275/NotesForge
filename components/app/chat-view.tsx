@@ -1,18 +1,22 @@
 "use client"
 
-import { useRef, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import { ArrowUp, Paperclip, Sparkles, FileText, BookOpen, Plus } from "lucide-react"
-import { chatHistory, suggestedQuestions, subjects, type ChatMessage } from "@/lib/mock-data"
+import { loadSubjects } from "@/lib/subjects-store"
+import type { ChatMessage } from "@/lib/mock-data"
 import { cn } from "@/lib/utils"
 
-const scopeChips = ["All subjects", ...subjects.slice(0, 4).map((s) => s.name)]
-
 export function ChatView() {
-  const [messages, setMessages] = useState<ChatMessage[]>(chatHistory)
+  const [messages, setMessages] = useState<ChatMessage[]>([])
   const [input, setInput] = useState("")
   const [scope, setScope] = useState("All subjects")
+  const [scopeChips, setScopeChips] = useState(["All subjects"])
   const [thinking, setThinking] = useState(false)
   const endRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    setScopeChips(["All subjects", ...loadSubjects().slice(0, 4).map((subject) => subject.name)])
+  }, [])
 
   function send(text: string) {
     const trimmed = text.trim()
@@ -30,12 +34,7 @@ export function ChatView() {
       const reply: ChatMessage = {
         id: `a-${Date.now()}`,
         role: "assistant",
-        content:
-          "Based on your uploaded materials, here is a concise explanation. This response is grounded in the sources cited below so you can jump straight to the relevant passage in your notes.",
-        citations: [
-          { source: "OS_Lecture_09_Deadlocks.pdf", location: "Page 42" },
-          { source: "OS_Concurrency_Notes.pdf", location: "Page 8" },
-        ],
+        content: `I received your question${scope === "All subjects" ? "" : ` for ${scope}`}. Add study materials to get answers grounded in your own sources.`,
       }
       setMessages((prev) => [...prev, reply])
       setThinking(false)
@@ -46,7 +45,7 @@ export function ChatView() {
   }
 
   return (
-    <div className="flex h-[calc(100vh-8.5rem)] flex-col">
+    <div className="mx-auto flex min-h-[calc(100vh-8.5rem)] w-full max-w-6xl flex-col px-4 py-6 sm:px-8">
       {/* Scope selector */}
       <div className="flex flex-wrap items-center gap-2 border-b border-border pb-4">
         <span className="text-[13px] text-muted-foreground">Context</span>
@@ -81,18 +80,10 @@ export function ChatView() {
       </div>
 
       {/* Suggested questions */}
-      {messages.length <= 3 && (
-        <div className="mb-3 flex flex-wrap gap-2">
-          {suggestedQuestions.map((q) => (
-            <button
-              key={q}
-              onClick={() => send(q)}
-              className="rounded-lg border border-border bg-card px-3 py-1.5 text-left text-[12px] text-muted-foreground transition-colors hover:border-foreground/20 hover:text-foreground"
-            >
-              {q}
-            </button>
-          ))}
-        </div>
+      {messages.length === 0 && (
+        <p className="mb-3 text-center text-sm text-muted-foreground">
+          Ask a question about your uploaded materials to get started.
+        </p>
       )}
 
       {/* Composer */}

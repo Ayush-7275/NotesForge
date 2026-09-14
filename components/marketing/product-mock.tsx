@@ -3,9 +3,6 @@ import {
   BookOpen,
   FileText,
   MessageSquare,
-  Layers,
-  ListChecks,
-  CalendarDays,
   Search,
   Sparkles,
   Send,
@@ -38,9 +35,6 @@ const miniNav = [
   { icon: BookOpen, label: 'Subjects' },
   { icon: FileText, label: 'Notes' },
   { icon: MessageSquare, label: 'AI Chat' },
-  { icon: Layers, label: 'Flashcards' },
-  { icon: ListChecks, label: 'Quizzes' },
-  { icon: CalendarDays, label: 'Planner' },
 ]
 
 function MiniSidebar({ activeLabel = 'Dashboard' }: { activeLabel?: string }) {
@@ -138,7 +132,7 @@ function DashboardBody() {
             AI recommends
           </p>
           <p className="text-[11px] leading-relaxed text-muted-foreground">
-            Review 12 weak flashcards in Databases before Thursday.
+            Review your Databases notes before Thursday.
           </p>
         </div>
       </div>

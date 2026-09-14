@@ -2,12 +2,11 @@
 
 import { useMemo, useState } from "react"
 import { Search, Sparkles, Star, FileText } from "lucide-react"
-import { notes, subjects } from "@/lib/mock-data"
 import { cn } from "@/lib/utils"
 
-const filters = ["All", ...subjects.map((s) => s.name)]
-
 export function NotesView() {
+  const [notes] = useState<Note[]>([])
+  const [filters] = useState(["All"])
   const [query, setQuery] = useState("")
   const [filter, setFilter] = useState("All")
 
@@ -118,4 +117,15 @@ export function NotesView() {
       )}
     </div>
   )
+}
+
+type Note = {
+  id: string
+  title: string
+  subject: string
+  excerpt: string
+  tags: string[]
+  updated: string
+  aiGenerated: boolean
+  starred: boolean
 }

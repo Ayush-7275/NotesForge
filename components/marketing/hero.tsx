@@ -15,8 +15,7 @@ export function Hero() {
         </h1>
         <p className="mx-auto mt-5 max-w-2xl text-pretty text-base leading-relaxed text-muted-foreground sm:text-lg">
           Upload your syllabus, lecture slides, PDFs, and notes. NoteForge
-          organizes everything into summaries, quizzes, flashcards, and a
-          personal AI study assistant.
+          organizes everything into summaries and a personal AI study assistant.
         </p>
         <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
           <Link

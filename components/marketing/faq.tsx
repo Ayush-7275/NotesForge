@@ -23,7 +23,7 @@ const faqs = [
   },
   {
     q: 'Do I need to organize my files first?',
-    a: 'No. Just upload everything for a subject and NoteForge structures it into notes, summaries, flashcards, and quizzes for you.',
+    a: 'No. Just upload everything for a subject and NoteForge structures it into organized notes and summaries for you.',
   },
 ]
 
