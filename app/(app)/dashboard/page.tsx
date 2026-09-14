@@ -6,9 +6,6 @@ import {
   ArrowRight,
   Sparkles,
   Clock,
-  FileType2,
-  Presentation,
-  FileImage,
   PlayCircle,
 } from 'lucide-react'
 import {
@@ -20,7 +17,6 @@ import {
 import {
   subjects,
   exams,
-  files,
   recommendations,
 } from '@/lib/mock-data'
 
@@ -30,16 +26,8 @@ const quickActions = [
   { label: 'Open AI chat', icon: MessageSquare, href: '/chat' },
 ]
 
-const fileIcons = {
-  pdf: FileType2,
-  ppt: Presentation,
-  doc: FileText,
-  image: FileImage,
-}
-
 export default function DashboardPage() {
   const recentSubjects = subjects.slice(0, 4)
-  const recentFiles = files.slice(0, 4)
 
   return (
     <div className="mx-auto max-w-6xl px-4 py-6 sm:px-8">
@@ -164,36 +152,9 @@ export default function DashboardPage() {
                 </Link>
               }
             />
-            <div className="divide-y divide-border">
-              {recentFiles.map((f) => {
-                const Icon = fileIcons[f.type]
-                return (
-                  <div
-                    key={f.id}
-                    className="flex items-center gap-3 px-4 py-3"
-                  >
-                    <span className="flex size-8 items-center justify-center rounded-md border border-border bg-muted/40">
-                      <Icon className="size-4 text-muted-foreground" />
-                    </span>
-                    <div className="min-w-0 flex-1">
-                      <p className="truncate text-[13px] font-medium text-foreground">
-                        {f.name}
-                      </p>
-                      <p className="text-[11px] text-muted-foreground">
-                        {f.subject} · {f.size}
-                      </p>
-                    </div>
-                    {f.status === 'completed' ? (
-                      <Badge variant="brand">Ready</Badge>
-                    ) : f.status === 'processing' ? (
-                      <Badge variant="outline">Processing</Badge>
-                    ) : (
-                      <Badge>Queued</Badge>
-                    )}
-                  </div>
-                )
-              })}
-            </div>
+            <p className="px-4 py-10 text-center text-sm text-muted-foreground">
+              No files uploaded yet. Upload course material to see it here.
+            </p>
           </Card>
         </div>
 
