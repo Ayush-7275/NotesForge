@@ -1,14 +1,23 @@
 'use client'
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { Search, Bell, Menu, X, LogOut, User } from 'lucide-react'
 import { AppSidebar } from '@/components/app/app-sidebar'
+import { defaultProfile, loadProfile, type Profile } from '@/lib/profile-store'
 
 export function AppTopbar() {
   const [mobileOpen, setMobileOpen] = useState(false)
   const [profileOpen, setProfileOpen] = useState(false)
   const [notifOpen, setNotifOpen] = useState(false)
+  const [profile, setProfile] = useState<Profile>(defaultProfile)
+
+  useEffect(() => {
+    const updateProfile = () => setProfile(loadProfile())
+    updateProfile()
+    window.addEventListener('noteforge-profile-updated', updateProfile)
+    return () => window.removeEventListener('noteforge-profile-updated', updateProfile)
+  }, [])
 
   return (
     <>
@@ -90,20 +99,20 @@ export function AppTopbar() {
               aria-label="Account menu"
             >
               <span className="flex size-7 items-center justify-center rounded-full bg-foreground text-xs font-medium text-background">
-                JS
+                {profile.name.slice(0, 2).toUpperCase()}
               </span>
               <span className="hidden text-[13px] font-medium text-foreground sm:block">
-                Jordan Silva
+                {profile.name}
               </span>
             </button>
             {profileOpen && (
               <div className="absolute right-0 top-full z-40 mt-1.5 w-56 rounded-lg border border-border bg-popover p-1 shadow-md">
                 <div className="px-3 py-2">
                   <p className="text-[13px] font-medium text-foreground">
-                    Jordan Silva
+                    {profile.name}
                   </p>
                   <p className="text-[11px] text-muted-foreground">
-                    jordan@university.edu
+                    {profile.email}
                   </p>
                 </div>
                 <div className="my-1 h-px bg-border" />
