@@ -37,9 +37,6 @@ export function AppTopbar() {
             placeholder="Search subjects, notes, files…"
             className="h-9 w-full rounded-lg border border-border bg-muted/40 pl-9 pr-16 text-sm text-foreground outline-none transition-colors placeholder:text-muted-foreground focus:border-ring focus:bg-background"
           />
-          <kbd className="pointer-events-none absolute right-2.5 top-1/2 hidden -translate-y-1/2 items-center gap-0.5 rounded border border-border bg-background px-1.5 py-0.5 font-mono text-[10px] text-muted-foreground md:flex">
-            ⌘K
-          </kbd>
         </div>
 
         <div className="ml-auto flex items-center justify-end">
