@@ -42,7 +42,7 @@ export function AppTopbar() {
           </kbd>
         </div>
 
-        <div className="flex flex-1 items-center justify-end sm:flex-none">
+        <div className="ml-auto flex items-center justify-end">
           <div className="relative">
             <button
               type="button"
