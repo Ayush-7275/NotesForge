@@ -8,7 +8,9 @@ export default function UploadsPage() {
         title="Uploads"
         description="Upload your course materials and NoteForge will turn them into organized notes."
       />
-      <UploadsView />
+      <div className="mx-auto max-w-6xl px-4 py-6 sm:px-8">
+        <UploadsView />
+      </div>
     </div>
   )
 }
