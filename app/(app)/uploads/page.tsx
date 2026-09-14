@@ -6,7 +6,7 @@ export default function UploadsPage() {
     <div>
       <PageHeader
         title="Uploads"
-        description="Upload your course materials and NoteForge will turn them into notes, flashcards, and quizzes."
+        description="Upload your course materials and NoteForge will turn them into organized notes."
       />
       <UploadsView />
     </div>

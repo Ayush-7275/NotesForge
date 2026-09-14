@@ -1,7 +1,7 @@
 const testimonials = [
   {
     quote:
-      'I uploaded a semester of lecture slides and had organized notes and flashcards the same evening. It changed how I revise.',
+      'I uploaded a semester of lecture slides and had organized notes the same evening. It changed how I revise.',
     name: 'Ananya R.',
     role: 'Computer Science, 3rd year',
   },
@@ -19,7 +19,7 @@ const testimonials = [
   },
   {
     quote:
-      'Quizzes generated from my own notes caught the gaps I did not know I had. Grades went up a full letter.',
+      'Notes generated from my own material helped me catch gaps I did not know I had. Grades went up a full letter.',
     name: 'Daniel K.',
     role: 'Mechanical Engineering',
   },

@@ -59,7 +59,7 @@ export function AppTopbar() {
                     s: 'Database Systems · 10 min ago',
                   },
                   {
-                    t: '12 flashcards are due for review',
+                    t: 'Your uploaded material is ready',
                     s: 'Database Systems · 1 hour ago',
                   },
                   {

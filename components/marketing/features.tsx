@@ -1,9 +1,6 @@
 import {
   FileText,
-  Layers,
-  ListChecks,
   MessageSquare,
-  CalendarDays,
   Upload,
 } from 'lucide-react'
 
@@ -14,24 +11,9 @@ const features = [
     body: 'Turn dense lecture slides and PDFs into clean, readable notes with headings, tables, callouts, and code blocks.',
   },
   {
-    icon: Layers,
-    title: 'Flashcards that stick',
-    body: 'Auto-generate spaced-repetition flashcards from any material and review only what you are about to forget.',
-  },
-  {
-    icon: ListChecks,
-    title: 'Practice quizzes',
-    body: 'Generate quizzes from your own content, with instant grading and explanations for every answer.',
-  },
-  {
     icon: MessageSquare,
     title: 'Chat with your documents',
     body: 'Ask questions and get answers grounded in your uploads, with citations back to the exact page and slide.',
-  },
-  {
-    icon: CalendarDays,
-    title: 'Personalized study plans',
-    body: 'Get a weekly schedule built around your exams, progress, and the topics you find hardest.',
   },
   {
     icon: Upload,

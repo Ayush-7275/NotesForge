@@ -9,12 +9,12 @@ const steps = [
   {
     step: 'Step 2',
     title: 'Let AI organize it',
-    body: 'Each subject is structured into summaries, notes, flashcards, and quizzes — with citations back to the source.',
+    body: 'Each subject is structured into summaries and notes — with citations back to the source.',
   },
   {
     step: 'Step 3',
     title: 'Study and ask questions',
-    body: 'Review with spaced repetition, test yourself, and chat with your documents whenever something is unclear.',
+    body: 'Review your notes and chat with your documents whenever something is unclear.',
   },
 ]
 

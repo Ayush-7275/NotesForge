@@ -7,9 +7,6 @@ import {
   BookOpen,
   FileText,
   MessageSquare,
-  Layers,
-  ListChecks,
-  CalendarDays,
   Upload,
   Settings,
   ChevronsUpDown,
@@ -24,9 +21,6 @@ const nav = [
   { label: 'Subjects', href: '/subjects', icon: BookOpen },
   { label: 'Notes', href: '/notes', icon: FileText },
   { label: 'AI Chat', href: '/chat', icon: MessageSquare },
-  { label: 'Flashcards', href: '/flashcards', icon: Layers },
-  { label: 'Quizzes', href: '/quizzes', icon: ListChecks },
-  { label: 'Study Planner', href: '/planner', icon: CalendarDays },
   { label: 'Uploads', href: '/uploads', icon: Upload },
 ]
 

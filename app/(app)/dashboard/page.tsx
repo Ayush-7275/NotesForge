@@ -2,7 +2,6 @@ import Link from 'next/link'
 import {
   Upload,
   FileText,
-  ListChecks,
   MessageSquare,
   ArrowRight,
   Sparkles,
@@ -28,7 +27,6 @@ import {
 const quickActions = [
   { label: 'Upload material', icon: Upload, href: '/uploads' },
   { label: 'Generate notes', icon: FileText, href: '/notes' },
-  { label: 'Create quiz', icon: ListChecks, href: '/quizzes' },
   { label: 'Open AI chat', icon: MessageSquare, href: '/chat' },
 ]
 
@@ -50,7 +48,7 @@ export default function DashboardPage() {
           Good afternoon, Jordan
         </h1>
         <p className="mt-1 text-sm text-muted-foreground">
-          You have 3 tasks and 12 flashcards due today.
+          Keep your course materials and notes organized in one place.
         </p>
       </div>
 

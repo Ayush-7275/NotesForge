@@ -6,8 +6,6 @@ import {
   FileText,
   Presentation,
   FileType2,
-  Layers,
-  ListChecks,
   MessageSquare,
   Sparkles,
   ArrowRight,
@@ -17,15 +15,12 @@ import {
 import { cn } from '@/lib/utils'
 import { Card, CardHeader, ProgressBar, Badge } from '@/components/app/primitives'
 import type { Subject } from '@/lib/mock-data'
-import { flashcards, quizzes } from '@/lib/mock-data'
 
 const tabs = [
   'Overview',
   'Notes',
   'PPTs',
   'PDFs',
-  'Flashcards',
-  'Quizzes',
   'AI Chat',
 ] as const
 
@@ -51,8 +46,6 @@ const pdfFiles = [
 
 export function SubjectWorkspace({ subject }: { subject: Subject }) {
   const [active, setActive] = useState<Tab>('Overview')
-  const subjectCards = flashcards.filter((c) => c.subject === subject.name)
-  const subjectQuizzes = quizzes.filter((q) => q.subject === subject.name)
 
   return (
     <div>
@@ -124,8 +117,6 @@ export function SubjectWorkspace({ subject }: { subject: Subject }) {
         {active === 'Notes' && <NotesTab />}
         {active === 'PPTs' && <FilesTab files={pptFiles} kind="ppt" />}
         {active === 'PDFs' && <FilesTab files={pdfFiles} kind="pdf" />}
-        {active === 'Flashcards' && <CardsTab cards={subjectCards} />}
-        {active === 'Quizzes' && <QuizzesTab quizzes={subjectQuizzes} />}
         {active === 'AI Chat' && <ChatTab subject={subject.name} />}
       </div>
     </div>
@@ -135,8 +126,6 @@ export function SubjectWorkspace({ subject }: { subject: Subject }) {
 function OverviewTab({ subject }: { subject: Subject }) {
   const stats = [
     { label: 'Notes', value: subject.notes, icon: FileText },
-    { label: 'Flashcards', value: subject.flashcards, icon: Layers },
-    { label: 'Quizzes', value: subject.quizzes, icon: ListChecks },
     { label: 'Resources', value: subject.resources, icon: FileType2 },
   ]
   return (
@@ -169,8 +158,7 @@ function OverviewTab({ subject }: { subject: Subject }) {
               Focus next
             </p>
             <p className="mt-0.5 text-[13px]">
-              Your weakest topic is deadlock avoidance. Review the Banker&apos;s
-              algorithm notes and take the practice quiz.
+              Review the notes for your weakest topic next.
             </p>
           </div>
         </div>
@@ -237,71 +225,6 @@ function FilesTab({
           <button className="rounded-md p-2 text-muted-foreground transition-colors hover:bg-muted hover:text-foreground">
             <Download className="size-4" />
           </button>
-        </div>
-      ))}
-    </div>
-  )
-}
-
-function CardsTab({ cards }: { cards: typeof flashcards }) {
-  return (
-    <div className="space-y-4">
-      <div className="flex items-center justify-between">
-        <p className="text-sm text-muted-foreground">
-          {cards.length} cards · {cards.filter((c) => c.due.includes('today')).length}{' '}
-          due today
-        </p>
-        <Link
-          href="/flashcards"
-          className="inline-flex items-center gap-1.5 rounded-lg bg-foreground px-3 py-2 text-[13px] font-medium text-background transition-opacity hover:opacity-90"
-        >
-          Start review
-        </Link>
-      </div>
-      <div className="grid gap-3 sm:grid-cols-2">
-        {cards.map((c) => (
-          <div key={c.id} className="rounded-xl border border-border bg-card p-4">
-            <div className="mb-2 flex items-center justify-between">
-              <Badge variant={c.status === 'review' ? 'brand' : 'outline'}>
-                {c.status}
-              </Badge>
-              <span className="text-[11px] text-muted-foreground">{c.due}</span>
-            </div>
-            <p className="text-[14px] font-medium text-foreground">{c.front}</p>
-            <p className="mt-1.5 text-[13px] leading-relaxed text-muted-foreground">
-              {c.back}
-            </p>
-          </div>
-        ))}
-      </div>
-    </div>
-  )
-}
-
-function QuizzesTab({ quizzes }: { quizzes: typeof quizzes }) {
-  return (
-    <div className="space-y-3">
-      {quizzes.map((q) => (
-        <div
-          key={q.id}
-          className="flex items-center gap-4 rounded-xl border border-border bg-card p-4"
-        >
-          <span className="flex size-9 items-center justify-center rounded-lg border border-border">
-            <ListChecks className="size-4 text-foreground" />
-          </span>
-          <div className="min-w-0 flex-1">
-            <p className="text-[14px] font-medium text-foreground">{q.title}</p>
-            <p className="text-[11px] text-muted-foreground">
-              {q.questions} questions ·{' '}
-              {q.bestScore !== null ? `best ${q.bestScore}%` : 'not attempted'}
-            </p>
-          </div>
-          <Link
-            href="/quizzes"
-            className="rounded-lg border border-border px-3 py-1.5 text-[13px] font-medium text-foreground transition-colors hover:bg-muted"
-          >
-            {q.bestScore !== null ? 'Retake' : 'Start'}
-          </Link>
         </div>
       ))}
     </div>
