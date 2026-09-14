@@ -8,7 +8,6 @@ import {
   FileText,
   MessageSquare,
   Upload,
-  Settings,
 } from 'lucide-react'
 import { cn } from '@/lib/utils'
 
@@ -50,21 +49,6 @@ export function AppSidebar({ onNavigate }: { onNavigate?: () => void }) {
         })}
       </nav>
 
-      <div className="border-t border-sidebar-border p-3">
-        <Link
-          href="/settings"
-          onClick={onNavigate}
-          className={cn(
-            'flex items-center gap-2.5 rounded-lg px-2.5 py-2 text-[13px] transition-colors',
-            pathname === '/settings'
-              ? 'bg-background font-medium text-foreground shadow-sm'
-              : 'text-muted-foreground hover:bg-muted hover:text-foreground',
-          )}
-        >
-          <Settings className="size-4" />
-          Settings
-        </Link>
-      </div>
     </div>
   )
 }
