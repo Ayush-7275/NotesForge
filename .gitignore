@@ -8,8 +8,21 @@ __v0_jsx-dev-runtime.ts
 
 # Environment variables
 .env*.local
+.env
+.env.*
+!.env.example
+
+# Local credentials and private keys
+*.pem
+*.key
+*.crt
+*secret*
+*secrets*
+*password*
 
 # Common ignores
 node_modules
 .next/
+*.tsbuildinfo
 .DS_Store
+.neon

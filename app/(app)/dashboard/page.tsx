@@ -15,6 +15,7 @@ import { Card, CardHeader, ProgressBar, Badge } from '@/components/app/primitive
 import type { Subject } from '@/lib/mock-data'
 import { loadSubjects } from '@/lib/subjects-store'
 import { loadUploads, type StudyFile } from '@/lib/uploads-store'
+import { defaultProfile, loadProfile, type Profile } from '@/lib/profile-store'
 
 const quickActions = [
   { label: 'Upload material', icon: Upload, href: '/uploads' },
@@ -32,17 +33,22 @@ const fileIcons = {
 export default function DashboardPage() {
   const [recentSubjects, setRecentSubjects] = useState<Subject[]>([])
   const [recentFiles, setRecentFiles] = useState<StudyFile[]>([])
+  const [profile, setProfile] = useState<Profile>(defaultProfile)
 
   useEffect(() => {
     setRecentSubjects(loadSubjects().slice(0, 4))
     setRecentFiles(loadUploads().slice(0, 4))
+    const updateProfile = () => setProfile(loadProfile())
+    updateProfile()
+    window.addEventListener('noteforge-profile-updated', updateProfile)
+    return () => window.removeEventListener('noteforge-profile-updated', updateProfile)
   }, [])
 
   return (
     <div className="mx-auto max-w-6xl px-4 py-6 sm:px-8">
       <div className="mb-6">
         <h1 className="text-xl font-semibold tracking-tight text-foreground">
-          Good afternoon, Jordan
+          Good afternoon, {profile.name}
         </h1>
         <p className="mt-1 text-sm text-muted-foreground">
           Keep your course materials and notes organized in one place.
