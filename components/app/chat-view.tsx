@@ -29,19 +29,44 @@ export function ChatView() {
     setMessages((prev) => [...prev, userMsg])
     setInput("")
     setThinking(true)
+    void requestAnswer(trimmed)
+  }
 
-    setTimeout(() => {
-      const reply: ChatMessage = {
-        id: `a-${Date.now()}`,
-        role: "assistant",
-        content: `I received your question${scope === "All subjects" ? "" : ` for ${scope}`}. Add study materials to get answers grounded in your own sources.`,
+  async function requestAnswer(question: string) {
+    try {
+      const response = await fetch("/api/chat", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          message: question,
+          scope,
+          history: messages.map((message) => ({
+            role: message.role === "assistant" ? "model" : "user",
+            content: message.content,
+          })),
+        }),
+      })
+      const result = (await response.json()) as { answer?: string; error?: string }
+      if (!response.ok || !result.answer) {
+        throw new Error(result.error || "The assistant could not answer right now.")
       }
-      setMessages((prev) => [...prev, reply])
+      setMessages((prev) => [
+        ...prev,
+        { id: `a-${Date.now()}`, role: "assistant", content: result.answer! },
+      ])
+    } catch (error) {
+      setMessages((prev) => [
+        ...prev,
+        {
+          id: `e-${Date.now()}`,
+          role: "assistant",
+          content: error instanceof Error ? error.message : "The assistant could not answer right now.",
+        },
+      ])
+    } finally {
       setThinking(false)
       requestAnimationFrame(() => endRef.current?.scrollIntoView({ behavior: "smooth" }))
-    }, 900)
-
-    requestAnimationFrame(() => endRef.current?.scrollIntoView({ behavior: "smooth" }))
+    }
   }
 
   return (
